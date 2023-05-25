@@ -44,7 +44,7 @@
             [
                 "74a7e9c9.7a9c4",
                 "47526a8a183b6f81",
-                "171588a2ed1eb1f3"
+                "2a71c12e5db46a1c"
             ]
         ]
     },
@@ -53,7 +53,7 @@
         "type": "debug",
         "z": "866ea73f44789dea",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -70,7 +70,7 @@
         "type": "debug",
         "z": "866ea73f44789dea",
         "name": "debug 2",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -97,9 +97,9 @@
         "y": 400,
         "wires": [
             [
-                "f1909cdc3a2e804e",
                 "47e2948514c8171b",
-                "ed983f0c5fb7e203"
+                "ed983f0c5fb7e203",
+                "f1909cdc3a2e804e"
             ]
         ]
     },
@@ -176,29 +176,80 @@
         ]
     },
     {
-        "id": "73caa5dff7457bbf",
-        "type": "mqtt out",
-        "z": "866ea73f44789dea",
-        "name": "",
-        "topic": "",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "a3e2e17bd3bd105d",
-        "x": 470,
-        "y": 520,
-        "wires": []
-    },
-    {
         "id": "171588a2ed1eb1f3",
         "type": "function",
         "z": "866ea73f44789dea",
         "name": "Extract Data",
-        "func": "var id = msg.payload.id;\nvar temperature = msg.payload.temperature;\n\nmsg.topic = \"INSERT INTO your_table (id, temperature) VALUES ('\" + id + \"', \" + temperature + \");\";\nreturn msg;",
+        "func": "var id = msg.payload.id;\nvar temperature = msg.payload.temperature;\n\n// Create an array of queries\nvar queries = [\n    {\n        query: 'INSERT INTO messages (id_device, suhu)' + 'VALUES ($id_device, $suhu)',\n        params: {\n            id_device: id,\n            suhu: temperature,\n        },\n        output: true,\n    },\n];\n\nmsg.payload = queries;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d479777081b57524",
+        "type": "debug",
+        "z": "866ea73f44789dea",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "eccb4d10fc966e24",
+        "type": "debug",
+        "z": "866ea73f44789dea",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6434a4204b3000ad",
+        "type": "postgresql",
+        "z": "866ea73f44789dea",
+        "name": "",
+        "query": "INSERT INTO messages (id_device, suhu) VALUES ($1, $2);",
+        "postgreSQLConfig": "686ee02c.306a",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 970,
+        "y": 80,
+        "wires": [
+            [
+                "eccb4d10fc966e24"
+            ]
+        ]
+    },
+    {
+        "id": "2a71c12e5db46a1c",
+        "type": "function",
+        "z": "866ea73f44789dea",
+        "name": "Parse JSON",
+        "func": "var data = msg.payload;\nvar id = data.id;\nvar temperature = data.temperature;\n\nmsg.params = [id, temperature];\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -208,22 +259,9 @@
         "y": 80,
         "wires": [
             [
-                "5eebb27b2b380a1b"
+                "6434a4204b3000ad",
+                "d479777081b57524"
             ]
-        ]
-    },
-    {
-        "id": "5eebb27b2b380a1b",
-        "type": "postgres",
-        "z": "866ea73f44789dea",
-        "postgresdb": "8a9ed8da.03e7c",
-        "name": "",
-        "output": true,
-        "outputs": 1,
-        "x": 950,
-        "y": 80,
-        "wires": [
-            []
         ]
     },
     {
@@ -265,39 +303,29 @@
         "className": "dashboard"
     },
     {
-        "id": "a3e2e17bd3bd105d",
-        "type": "mqtt-broker",
-        "name": "",
-        "broker": "10.7.109.23",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "8a9ed8da.03e7c",
-        "type": "postgresdb",
-        "hostname": "localhost",
+        "id": "686ee02c.306a",
+        "type": "postgreSQLConfig",
+        "name": "@127.0.0.1:5432/tubes",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
         "port": "5432",
-        "db": "your_database",
-        "ssl": false
+        "portFieldType": "num",
+        "database": "tubes",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "postgres",
+        "userFieldType": "str",
+        "password": "Admin",
+        "passwordFieldType": "str"
     },
     {
         "id": "1be8510ac317954f",
