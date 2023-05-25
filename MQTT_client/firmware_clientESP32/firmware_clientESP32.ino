@@ -117,16 +117,16 @@ void loop() {
   Serial.println(t);
 
       // Convert the value to a char array
+    int id = 1;
     char tempString[8];
     dtostrf(t, 1, 2, tempString);
     Serial.print("Temperature: ");
     Serial.println(tempString);
     Serial.println(modifiedHostname);
-//    client.publish("/esp32-mqtt/temp", tempString); 
-
     // Publish data to MQTT topic
     char payload[50];
-    sprintf(payload, "{\"id\":\"%s\",\"temperature\":%2.f}", modifiedHostname.c_str(), t);
+    sprintf(payload, "{\"id\":%d,\"temperature\":%2.f}", id, t);
+//    sprintf(payload, "{\"id\":\"%s\",\"temperature\":%2.f}", id, modifiedHostname.c_str(), t);
     Serial.println(payload);
     client.publish("/esp32-mqtt/temp", payload);
   }
