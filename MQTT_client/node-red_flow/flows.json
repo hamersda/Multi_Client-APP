@@ -1,11 +1,230 @@
 [
     {
-        "id": "1fe0998e4cf86bc1",
+        "id": "866ea73f44789dea",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Flow 2",
         "disabled": false,
         "info": "",
         "env": []
+    },
+    {
+        "id": "1c84b3ae.17c2e9",
+        "type": "mqtt in",
+        "z": "866ea73f44789dea",
+        "name": "",
+        "topic": "/esp32-mqtt/temp",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "e133abd24b24eed8",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "3df3d7f2.e7e2a4"
+            ]
+        ]
+    },
+    {
+        "id": "3df3d7f2.e7e2a4",
+        "type": "function",
+        "z": "866ea73f44789dea",
+        "name": "Parse JSON",
+        "func": "var modifiedPayload = msg.payload.replace(/nan/g, 'null');\nvar data;\n\ntry {\n    data = JSON.parse(modifiedPayload);\n} catch (e) {\n    node.error('Error parsing JSON payload: ' + e);\n    return null;\n}\n\nvar id = data.id;\nvar temperature = data.temperature;\n\nmsg.payload = {\n    id: id,\n    temperature: temperature\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 160,
+        "wires": [
+            [
+                "74a7e9c9.7a9c4",
+                "47526a8a183b6f81",
+                "171588a2ed1eb1f3"
+            ]
+        ]
+    },
+    {
+        "id": "74a7e9c9.7a9c4",
+        "type": "debug",
+        "z": "866ea73f44789dea",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f1909cdc3a2e804e",
+        "type": "debug",
+        "z": "866ea73f44789dea",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "47526a8a183b6f81",
+        "type": "function",
+        "z": "866ea73f44789dea",
+        "name": "Parse JSON",
+        "func": "var data = msg.payload;\nvar temperature = data.temperature;\n\nmsg.payload = temperature;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 400,
+        "wires": [
+            [
+                "f1909cdc3a2e804e",
+                "47e2948514c8171b",
+                "ed983f0c5fb7e203"
+            ]
+        ]
+    },
+    {
+        "id": "47e2948514c8171b",
+        "type": "ui_gauge",
+        "z": "866ea73f44789dea",
+        "name": "",
+        "group": "8ac898374451ab2e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Suhu",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 690,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "ed983f0c5fb7e203",
+        "type": "ui_chart",
+        "z": "866ea73f44789dea",
+        "name": "",
+        "group": "8ac898374451ab2e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 670,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "73caa5dff7457bbf",
+        "type": "mqtt out",
+        "z": "866ea73f44789dea",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a3e2e17bd3bd105d",
+        "x": 470,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "171588a2ed1eb1f3",
+        "type": "function",
+        "z": "866ea73f44789dea",
+        "name": "Extract Data",
+        "func": "var id = msg.payload.id;\nvar temperature = msg.payload.temperature;\n\nmsg.topic = \"INSERT INTO your_table (id, temperature) VALUES ('\" + id + \"', \" + temperature + \");\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 80,
+        "wires": [
+            [
+                "5eebb27b2b380a1b"
+            ]
+        ]
+    },
+    {
+        "id": "5eebb27b2b380a1b",
+        "type": "postgres",
+        "z": "866ea73f44789dea",
+        "postgresdb": "8a9ed8da.03e7c",
+        "name": "",
+        "output": true,
+        "outputs": 1,
+        "x": 950,
+        "y": 80,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "e133abd24b24eed8",
@@ -37,7 +256,7 @@
     {
         "id": "8ac898374451ab2e",
         "type": "ui_group",
-        "name": "DHT11 Suhu",
+        "name": "msg.",
         "tab": "1be8510ac317954f",
         "order": 1,
         "disp": true,
@@ -46,174 +265,46 @@
         "className": "dashboard"
     },
     {
+        "id": "a3e2e17bd3bd105d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.7.109.23",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8a9ed8da.03e7c",
+        "type": "postgresdb",
+        "hostname": "localhost",
+        "port": "5432",
+        "db": "your_database",
+        "ssl": false
+    },
+    {
         "id": "1be8510ac317954f",
         "type": "ui_tab",
         "name": "Home",
         "icon": "dashboard",
         "disabled": false,
         "hidden": false
-    },
-    {
-        "id": "eaa6642f7ed9f459",
-        "type": "ui_base",
-        "theme": {
-            "name": "theme-light",
-            "lightTheme": {
-                "default": "#0094CE",
-                "baseColor": "#0094CE",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
-            },
-            "darkTheme": {
-                "default": "#097479",
-                "baseColor": "#097479",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
-            },
-            "customTheme": {
-                "name": "Untitled Theme 1",
-                "default": "#4B7930",
-                "baseColor": "#4B7930",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-            },
-            "themeState": {
-                "base-color": {
-                    "default": "#0094CE",
-                    "value": "#0094CE",
-                    "edited": false
-                },
-                "page-titlebar-backgroundColor": {
-                    "value": "#0094CE",
-                    "edited": false
-                },
-                "page-backgroundColor": {
-                    "value": "#fafafa",
-                    "edited": false
-                },
-                "page-sidebar-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-textColor": {
-                    "value": "#1bbfff",
-                    "edited": false
-                },
-                "group-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "widget-textColor": {
-                    "value": "#111111",
-                    "edited": false
-                },
-                "widget-backgroundColor": {
-                    "value": "#0094ce",
-                    "edited": false
-                },
-                "widget-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "base-font": {
-                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-                }
-            },
-            "angularTheme": {
-                "primary": "indigo",
-                "accents": "blue",
-                "warn": "red",
-                "background": "grey",
-                "palette": "light"
-            }
-        },
-        "site": {
-            "name": "Node-RED Dashboard",
-            "hideToolbar": "false",
-            "allowSwipe": "false",
-            "lockMenu": "false",
-            "allowTempTheme": "true",
-            "dateFormat": "DD/MM/YYYY",
-            "sizes": {
-                "sx": 48,
-                "sy": 48,
-                "gx": 6,
-                "gy": 6,
-                "cx": 6,
-                "cy": 6,
-                "px": 0,
-                "py": 0
-            }
-        }
-    },
-    {
-        "id": "4d98612d21a71ac4",
-        "type": "mqtt in",
-        "z": "1fe0998e4cf86bc1",
-        "name": "",
-        "topic": "/esp32-mqtt/temp",
-        "qos": "1",
-        "datatype": "auto-detect",
-        "broker": "e133abd24b24eed8",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 180,
-        "y": 220,
-        "wires": [
-            [
-                "87ae0009e6e443f3",
-                "0ac1eda32634a933"
-            ]
-        ]
-    },
-    {
-        "id": "87ae0009e6e443f3",
-        "type": "debug",
-        "z": "1fe0998e4cf86bc1",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 500,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "0ac1eda32634a933",
-        "type": "ui_gauge",
-        "z": "1fe0998e4cf86bc1",
-        "name": "",
-        "group": "8ac898374451ab2e",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Suhu",
-        "label": "°C",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "40",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 490,
-        "y": 300,
-        "wires": []
     }
 ]
