@@ -8,14 +8,14 @@
 DHT dhtt(DHT_PIN, DHT_TYPE);
 
 // Update these with values suitable for your network.
-const char* ssid = "TestTest";
-const char* password = "qwert1234";
+const char* ssid = "dimz";
+const char* password = "qwertyuiop";
 const char* mqtt_server = "test.mosquitto.org";
-String hostname = "ESP32 Node Temperature";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 unsigned long lastMsg = 0;
+String modifiedHostname;
 
 void setup_wifi() {
 
@@ -25,7 +25,24 @@ void setup_wifi() {
   Serial.print("Connecting to ");
   Serial.println(ssid);
   WiFi.mode(WIFI_STA);
-  WiFi.setHostname(hostname.c_str()); //define hostname
+
+  // Retrieve MAC address
+  uint8_t mac[6];
+  WiFi.macAddress(mac);
+
+  // Format MAC address as string
+  char macString[18];
+  sprintf(macString, "%02X%02X%02X%02X%02X%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+
+  // Get original hostname
+  String originalHostname = "ESP32suhu";
+
+  // Append MAC address to the hostname
+  modifiedHostname = originalHostname + "_" + macString;
+
+  // Set the modified hostname
+  WiFi.setHostname(modifiedHostname.c_str());
+  
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -55,6 +72,7 @@ void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
+    
     // Create a random client ID
     String clientId = "ESP32Client-";
     clientId += String(random(0xffff), HEX);
@@ -103,13 +121,13 @@ void loop() {
     dtostrf(t, 1, 2, tempString);
     Serial.print("Temperature: ");
     Serial.println(tempString);
-    client.publish("/esp32-mqtt/temp", tempString); 
-   
-    // Convert the value to a char array
-    //char humString[8];
-    //dtostrf(h, 1, 2, humString);
-    //Serial.print("Humidity: ");
-    //Serial.println(humString);
-    //client.publish("/esp32-mqtt/humi", humString);
+    Serial.println(modifiedHostname);
+//    client.publish("/esp32-mqtt/temp", tempString); 
+
+    // Publish data to MQTT topic
+    char payload[50];
+    sprintf(payload, "{\"id\":\"%s\",\"temperature\":%2.f}", modifiedHostname.c_str(), t);
+    Serial.println(payload);
+    client.publish("/esp32-mqtt/temp", payload);
   }
 }
