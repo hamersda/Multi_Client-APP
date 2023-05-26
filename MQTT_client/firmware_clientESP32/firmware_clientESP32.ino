@@ -126,7 +126,7 @@ void loop() {
     // Publish data to MQTT topic
     char payload[50];
     sprintf(payload, "{\"id\":%d,\"temperature\":%2.f}", id, t);
-//    sprintf(payload, "{\"id\":\"%s\",\"temperature\":%2.f}", id, modifiedHostname.c_str(), t);
+//  sprintf(payload, "{\"n\":\"%s\",\"temperature\":%2.f}", modifiedHostname.c_str(), t);
     Serial.println(payload);
     client.publish("/esp32-mqtt/temp", payload);
   }
