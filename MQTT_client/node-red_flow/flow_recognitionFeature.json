@@ -1,0 +1,23 @@
+[
+    {
+        "id": "99856068da4235c7",
+        "type": "function",
+        "z": "28f74172b6e388cf",
+        "name": "Parse JSON",
+        "func": "var modifiedPayload = msg.payload.replace(/nan/g, 'null');\nvar data;\n\ntry {\n    data = JSON.parse(modifiedPayload);\n} catch (e) {\n    node.error('Error parsing JSON payload: ' + e);\n    return null;\n}\n\nvar name_device = data.n;\nvar id;\nvar temperature = data.temperature;\n\nif (name_device == \"ESP32suhu_409151997F20\") {\n    id = 1\n}\nmsg.payload = {\n    id: id,\n    temperature: temperature\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 160,
+        "wires": [
+            [
+                "db7aa606b5a29855",
+                "56231b455d9b3f77",
+                "4b8c1982223bccff"
+            ]
+        ]
+    }
+]
