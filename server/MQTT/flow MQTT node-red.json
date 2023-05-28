@@ -1,0 +1,487 @@
+[
+    {
+        "id": "80fb8160c07729e3",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e133abd24b24eed8",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8ac898374451ab2e",
+        "type": "ui_group",
+        "name": "msg.",
+        "tab": "1be8510ac317954f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": "dashboard"
+    },
+    {
+        "id": "a3e2e17bd3bd105d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.7.109.23",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8a9ed8da.03e7c",
+        "type": "postgresdb",
+        "hostname": "localhost",
+        "port": "5432",
+        "db": "tubes",
+        "ssl": false
+    },
+    {
+        "id": "1be8510ac317954f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f7c146dd2751efdc",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "711d368a.8b1ec8",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "5ca14fd8.ffd9b",
+        "type": "ui_group",
+        "name": "Last",
+        "tab": "711d368a.8b1ec8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "686ee02c.306a",
+        "type": "postgreSQLConfig",
+        "name": "@127.0.0.1:5432/tubes",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "tubes",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "postgres",
+        "userFieldType": "str",
+        "password": "Admin",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "d6136431709b2c06",
+        "type": "mqtt in",
+        "z": "80fb8160c07729e3",
+        "name": "",
+        "topic": "/esp32-mqtt/temp",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "e133abd24b24eed8",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 1400,
+        "y": 200,
+        "wires": [
+            [
+                "268c33737bc894a2"
+            ]
+        ]
+    },
+    {
+        "id": "268c33737bc894a2",
+        "type": "function",
+        "z": "80fb8160c07729e3",
+        "name": "Parse JSON",
+        "func": "var modifiedPayload = msg.payload.replace(/nan/g, 'null');\nvar data;\n\ntry {\n    data = JSON.parse(modifiedPayload);\n} catch (e) {\n    node.error('Error parsing JSON payload: ' + e);\n    return null;\n}\n\nvar name_device = data.n;\nvar id;\nvar temperature = data.temperature;\n\nif (name_device == \"ESP32suhu_409151997F20\") {\n    id = 4\n}\nmsg.payload = {\n    id: id,\n    temperature: temperature\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1610,
+        "y": 200,
+        "wires": [
+            [
+                "97ea4369773c8ace",
+                "867ab8b937dcb8a7",
+                "6090cd3451be45c8"
+            ]
+        ]
+    },
+    {
+        "id": "97ea4369773c8ace",
+        "type": "debug",
+        "z": "80fb8160c07729e3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1780,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "dcf16709ddc8ab42",
+        "type": "debug",
+        "z": "80fb8160c07729e3",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1740,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "867ab8b937dcb8a7",
+        "type": "function",
+        "z": "80fb8160c07729e3",
+        "name": "Parse JSON",
+        "func": "var data = msg.payload;\nvar temperature = data.temperature;\n\nmsg.payload = temperature;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1670,
+        "y": 440,
+        "wires": [
+            [
+                "3e5a74f62ebf9b38",
+                "ed21aa45c05a7091",
+                "dcf16709ddc8ab42"
+            ]
+        ]
+    },
+    {
+        "id": "3e5a74f62ebf9b38",
+        "type": "ui_gauge",
+        "z": "80fb8160c07729e3",
+        "name": "",
+        "group": "8ac898374451ab2e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Suhu",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1730,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ed21aa45c05a7091",
+        "type": "ui_chart",
+        "z": "80fb8160c07729e3",
+        "name": "",
+        "group": "8ac898374451ab2e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1710,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e83817563de33f19",
+        "type": "function",
+        "z": "80fb8160c07729e3",
+        "name": "Extract Data",
+        "func": "var id = msg.payload.id;\nvar temperature = msg.payload.temperature;\n\n// Create an array of queries\nvar queries = [\n    {\n        query: 'INSERT INTO messages (id_device, suhu)' + 'VALUES ($id_device, $suhu)',\n        params: {\n            id_device: id,\n            suhu: temperature,\n        },\n        output: true,\n    },\n];\n\nmsg.payload = queries;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65f0196a74e4ee10",
+        "type": "debug",
+        "z": "80fb8160c07729e3",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2000,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b85f98b285627524",
+        "type": "debug",
+        "z": "80fb8160c07729e3",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2200,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6090cd3451be45c8",
+        "type": "function",
+        "z": "80fb8160c07729e3",
+        "name": "Parse JSON",
+        "func": "var data = msg.payload;\nvar id = data.id;\nvar temperature = data.temperature;\n\nmsg.params = [id, temperature];\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1810,
+        "y": 120,
+        "wires": [
+            [
+                "ca39098712a476a8",
+                "65f0196a74e4ee10"
+            ]
+        ]
+    },
+    {
+        "id": "ca39098712a476a8",
+        "type": "postgresql",
+        "z": "80fb8160c07729e3",
+        "name": "",
+        "query": "INSERT INTO messages (id_device, suhu) VALUES ($1, $2);",
+        "postgreSQLConfig": "686ee02c.306a",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 2010,
+        "y": 120,
+        "wires": [
+            [
+                "b85f98b285627524"
+            ]
+        ]
+    }
+]
