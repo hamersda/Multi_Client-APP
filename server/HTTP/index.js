@@ -6,9 +6,6 @@ const port = 8000;
 
 const db = require('./queries');
 
-const jwt = require('jsonwebtoken');
-const secretKey = 'your-secret-key';
-
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
